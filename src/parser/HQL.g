@@ -8,6 +8,7 @@ options {
 }
 
 tokens{
+   STATEMENT;
    TREE_NODE;
    COLUMN_DEF;
    TABLE_DEF;
@@ -24,7 +25,12 @@ tokens{
 }
 
 start_rule:
-   define SEMICOLON (define SEMICOLON)* EOF 
+   (statement)+ EOF 
+;
+
+statement:
+   define SEMICOLON
+      -> ^(STATEMENT define)
 ;
 
 define:
